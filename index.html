@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ricardo's by Cucina Higala</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+    --dark:#182018;
+    --green:#344335;
+    --cream:#f5f0e6;
+    --paper:#fbf8f1;
+    --brown:#98603d;
+    --gold:#c49a67;
+    --text:#252a25;
+    --muted:#6d756b;
+    --line:rgba(37,42,37,.16);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--cream);color:var(--text);font-family:Inter,Arial,sans-serif;line-height:1.6}
+a{text-decoration:none;color:inherit;-webkit-tap-highlight-color:transparent}
+button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+
+.topbar{background:var(--dark);color:#eee8dc;text-align:center;padding:8px;font-size:9px;letter-spacing:2px;text-transform:uppercase}
+header{height:78px;background:rgba(251,248,241,.98);position:sticky;top:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;padding:0 6%;border-bottom:1px solid var(--line);box-shadow:0 3px 15px rgba(0,0,0,.05)}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo-circle{width:42px;height:42px;border:1px solid var(--dark);border-radius:50%;display:grid;place-items:center;font:700 24px "Cormorant Garamond",serif}
+.logo b{display:block;font:700 23px "Cormorant Garamond",serif;letter-spacing:2px}
+.logo small{display:block;font-size:7px;letter-spacing:2px;color:var(--muted)}
+nav{display:flex;align-items:center;gap:22px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+nav a{display:block;padding:12px 4px;transition:.2s}
+nav a:hover{color:var(--brown)}
+.reserve-link{border:1px solid var(--dark);padding:10px 15px!important}
+.menu-btn{display:none;border:0;background:none;color:var(--dark);font-size:29px;padding:8px}
+
+.hero{min-height:calc(100vh - 113px);position:relative;display:flex;align-items:center;overflow:hidden;color:white;background:radial-gradient(circle at 75% 25%,rgba(238,211,171,.3),transparent 25%),linear-gradient(120deg,#182018,#52614e 50%,#9a7456)}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,17,11,.8),rgba(10,17,11,.12));pointer-events:none}
+.hero-content{position:relative;z-index:2;width:88%;max-width:1100px;margin:auto;padding:80px 0}
+.eyebrow{font-size:10px;letter-spacing:3px;font-weight:700}
+.hero h1{font:600 clamp(58px,9vw,110px)/.85 "Cormorant Garamond",serif;margin:20px 0}
+.hero h1 em{color:#ead5b7}
+.hero p{max-width:520px;color:#f1ede4;font-size:16px}
+.buttons{display:flex;gap:12px;margin-top:30px}
+.btn{display:inline-block;padding:14px 20px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border:1px solid transparent;transition:.25s}
+.btn:active{transform:scale(.97)}
+.btn-light{background:#eee5d4;color:var(--dark)}
+.btn-outline{border-color:rgba(255,255,255,.8);color:white}
+.scroll{position:absolute;bottom:25px;left:6%;z-index:3;font-size:9px;letter-spacing:2px}
+
+section{padding:100px 8%}
+.label{font-size:10px;letter-spacing:2px;font-weight:700;color:var(--muted);margin-bottom:45px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9vw}
+h2{font:600 clamp(48px,6vw,80px)/.9 "Cormorant Garamond",serif;margin:15px 0 25px}
+h2 em{font-weight:500}
+.copy{color:var(--muted);max-width:520px;font-size:15px}
+.copy p{margin-bottom:15px}
+.link{display:inline-block;margin-top:10px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border-bottom:1px solid;padding-bottom:5px}
+
+.photo-banner{height:58vh;min-height:400px;display:grid;place-items:center;position:relative;overflow:hidden;background:linear-gradient(rgba(25,35,27,.25),rgba(25,35,27,.25)),url("https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1600&q=85") center/cover}
+.photo-placeholder{width:72%;height:72%;border:1px solid rgba(255,255,255,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;text-align:center;background:rgba(0,0,0,.18)}
+.photo-placeholder strong{font:600 clamp(48px,7vw,100px) "Cormorant Garamond",serif}
+.photo-placeholder small{font-size:9px;letter-spacing:2px}
+
+.menu-section{background:var(--paper)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:35px 0 25px}
+.tab{padding:10px 16px;border:1px solid var(--line);background:transparent;font-size:10px;letter-spacing:1px;text-transform:uppercase}
+.tab.active{background:var(--dark);color:white}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.dish{background:white;overflow:hidden;box-shadow:0 8px 25px rgba(0,0,0,.06);transition:.25s}
+.dish:active{transform:scale(.98)}
+.dish-img{height:230px;position:relative;overflow:hidden;background:#555}
+.dish-img img{width:100%;height:100%;object-fit:cover;display:block;transition:.4s}
+.dish:hover img{transform:scale(1.05)}
+.dish-number{position:absolute;left:15px;bottom:15px;background:rgba(0,0,0,.55);color:white;padding:6px 10px;font:600 18px "Cormorant Garamond",serif}
+.dish-body{padding:18px 20px 22px}
+.dish h3{font:600 27px "Cormorant Garamond",serif}
+.dish p{font-size:12px;color:var(--muted);min-height:40px;margin:7px 0}
+.dish strong{color:var(--brown);font-size:14px}
+.hide{display:none!important}
+.note{font-size:10px;color:var(--muted);margin-top:25px}
+
+.dark-section{background:var(--dark);color:#f4eee2}
+.dark-section .label{color:#b7c0b3}
+.dark-section .copy{color:#ccd0c8}
+.event-list{border-top:1px solid rgba(255,255,255,.18)}
+.event{display:grid;grid-template-columns:50px 1fr;gap:15px;padding:24px 0;border-bottom:1px solid rgba(255,255,255,.18)}
+.event>span{font:600 20px "Cormorant Garamond",serif;color:#bd8055}
+.event h3{font:600 27px "Cormorant Garamond",serif}
+.event p{color:#c9cec5;font-size:12px}
+
+.gallery{background:#eee8dc}
+.gallery-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;grid-auto-rows:210px;gap:13px}
+.g{background:linear-gradient(rgba(40,50,40,.1),rgba(20,25,20,.55)),url("https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=900&q=80") center/cover;color:white;padding:20px;display:flex;flex-direction:column;justify-content:end}
+.g.food{background-image:linear-gradient(rgba(40,50,40,.05),rgba(20,25,20,.55)),url("https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=80")}
+.g.tall{grid-row:span 2}
+.g.wide{grid-column:span 2}
+.g b{font:600 32px "Cormorant Garamond",serif}
+.g small{font-size:9px;letter-spacing:2px}
+
+.reservation{background:#222a23;color:#f4eee2}
+.form{background:#f8f3e8;color:var(--text);padding:30px}
+.form label{display:block;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px}
+.form input,.form select,.form textarea{width:100%;margin-top:6px;padding:12px;border:1px solid #d4cdbf;background:white;outline:none}
+.form input:focus,.form select:focus,.form textarea:focus{border-color:var(--brown)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.form .submit{width:100%;background:var(--dark);color:white;border:0}
+#message{font-size:12px;color:var(--brown);min-height:20px;margin-top:12px}
+
+.contact{background:var(--paper)}
+.contact-item{border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:18px}
+.contact-item span{font-size:9px;letter-spacing:2px;font-weight:700;color:var(--muted)}
+.contact-item p{margin:5px 0;font-size:15px}
+.map-btn{background:var(--dark);color:white;margin-top:8px}
+
+footer{padding:35px 8%;background:#171d18;color:#eee8dc;display:flex;justify-content:space-between;align-items:center;font-size:10px}
+
+.back-top{position:fixed;right:18px;bottom:18px;width:45px;height:45px;border:0;border-radius:50%;background:var(--dark);color:white;z-index:5000;opacity:0;pointer-events:none;transition:.3s}
+.back-top.show{opacity:1;pointer-events:auto}
+
+@media(max-width:800px){
+    header{height:70px}
+    .menu-btn{display:block;position:relative;z-index:10001}
+    nav{display:none;position:absolute;top:70px;left:0;right:0;background:var(--paper);flex-direction:column;align-items:stretch;padding:12px 7% 20px;gap:0;border-bottom:1px solid var(--line);box-shadow:0 10px 25px rgba(0,0,0,.12);z-index:10000}
+    nav.open{display:flex}
+    nav a{padding:15px 5px;border-bottom:1px solid rgba(0,0,0,.07)}
+    .reserve-link{text-align:center;margin-top:10px}
+    .hero{min-height:calc(100vh - 105px)}
+    .hero h1{font-size:62px}
+    .buttons{flex-direction:column}
+    .btn{text-align:center}
+    section{padding:75px 7%}
+    .grid2{grid-template-columns:1fr;gap:35px}
+    .menu-grid{grid-template-columns:1fr 1fr}
+    .gallery-grid{grid-template-columns:1fr 1fr}
+    .g.wide{grid-column:span 2}
+    footer{flex-direction:column;align-items:flex-start;gap:12px}
+}
+
+@media(max-width:520px){
+    .logo b{font-size:19px}
+    .hero h1{font-size:55px}
+    .menu-grid{grid-template-columns:1fr}
+    .gallery-grid{grid-template-columns:1fr}
+    .g.wide{grid-column:auto}
+    .row{grid-template-columns:1fr}
+    .photo-placeholder{width:85%;height:65%}
+    .photo-banner{min-height:350px}
+}
+</style>
+</head>
+<body>
+<div class="topbar">A Highland Dining Experience • Bukidnon</div>
+
+<header>
+<a href="#home" class="logo" onclick="goTo('home')">
+    <span class="logo-circle">R</span>
+    <span>
+        <b>RICARDO'S</b>
+        <small>BY CUCINA HIGALA</small>
+    </span>
+</a>
+
+<button class="menu-btn" id="menuButton" onclick="toggleMenu()">☰</button>
+
+<nav id="nav">
+<a href="#home" onclick="goTo('home')">Home</a>
+<a href="#about" onclick="goTo('about')">About</a>
+<a href="#menu" onclick="goTo('menu')">Menu</a>
+<a href="#events" onclick="goTo('events')">Events</a>
+<a href="#gallery" onclick="goTo('gallery')">Gallery</a>
+<a href="#contact" onclick="goTo('contact')">Contact</a>
+<a href="#reservation" class="reserve-link" onclick="goTo('reservation')">Reserve</a>
+</nav>
+</header>
+
+<main>
+<section class="hero" id="home">
+<div class="hero-content">
+<div class="eyebrow">BUKIDNON • FINE DINING • EXPERIENCE</div>
+<h1>A table worth<br><em>the journey.</em></h1>
+<p>Discover memorable food, warm hospitality, and a refined dining experience inspired by the beauty of Bukidnon.</p>
+<div class="buttons">
+<a class="btn btn-light" href="#reservation" onclick="goTo('reservation')">Reserve a Table</a>
+<a class="btn btn-outline" href="#menu" onclick="goTo('menu')">Explore the Menu</a>
+</div>
+</div>
+<div class="scroll">SCROLL TO DISCOVER ↓</div>
+</section>
+
+<section id="about">
+<div class="label">01 — OUR STORY</div>
+<div class="grid2">
+<div>
+<div class="eyebrow">A FOOD DESTINATION LIKE NO OTHER</div>
+<h2>Come hungry.<br><em>Leave with a story.</em></h2>
+</div>
+<div class="copy">
+<p>Ricardo's by Cucina Higala brings together good food, thoughtful presentation, and warm hospitality.</p>
+<p>Whether you're visiting for a family meal, celebration, or special occasion, make every visit memorable.</p>
+<a class="link" href="#contact" onclick="goTo('contact')">Plan Your Visit →</a>
+</div>
+</div>
+</section>
+
+<div class="photo-banner">
+<div class="photo-placeholder">
+<strong>RICARDO'S</strong>
+<small>FINE DINING • BUKIDNON</small>
+</div>
+</div>
+
+<section class="menu-section" id="menu">
+<div class="label">02 — THE MENU</div>
+<div class="grid2">
+<div>
+<div class="eyebrow">FAVORITES & SIGNATURES</div>
+<h2>Made for the<br><em>whole table.</em></h2>
+</div>
+<div class="copy">
+<p>Explore delicious selections for dinner, celebrations, family meals, and special occasions.</p>
+</div>
+</div>
+
+<div class="tabs">
+<button class="tab active" onclick="filterMenu('all',this)">All</button>
+<button class="tab" onclick="filterMenu('mains',this)">Mains</button>
+<button class="tab" onclick="filterMenu('filipino',this)">Filipino</button>
+<button class="tab" onclick="filterMenu('favorites',this)">Favorites</button>
+</div>
+
+<div class="menu-grid">
+<article class="dish" data-cat="mains favorites">
+<div class="dish-img">
+<img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=85" alt="Grilled ribs">
+<div class="dish-number">01</div>
+</div>
+<div class="dish-body">
+<h3>Baby Back Ribs</h3>
+<p>Slow-cooked and finished for a rich, savory bite.</p>
+<strong>₱775</strong>
+</div>
+</article>
+
+<article class="dish" data-cat="mains">
+<div class="dish-img">
+<img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=900&q=85" alt="Baked salmon">
+<div class="dish-number">02</div>
+</div>
+<div class="dish-body">
+<h3>Baked Salmon</h3>
+<p>A refined seafood option for a relaxed dinner.</p>
+<strong>₱750</strong>
+</div>
+</article>
+
+<article class="dish" data-cat="mains favorites">
+<div class="dish-img">
+<img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=85" alt="Braised beef">
+<div class="dish-number">03</div>
+</div>
+<div class="dish-body">
+<h3>Osso Buco</h3>
+<p>Slow-braised comfort with a special-occasion feel.</p>
+<strong>₱715</strong>
+</div>
+</article>
+
+<article class="dish" data-cat="filipino favorites">
+<div class="dish-img">
+<img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=80" alt="Filipino inspired dish">
+<div class="dish-number">04</div>
+</div>
+<div class="dish-body">
+<h3>Lechon Baka Sisig</h3>
+<p>A bold Filipino-inspired favorite for sharing.</p>
+<strong>₱610</strong>
+</div>
+</article>
+
+<article class="dish" data-cat="filipino">
+<div class="dish-img">
+<img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=900&q=85" alt="Filipino food">
+<div class="dish-number">05</div>
+</div>
+<div class="dish-body">
+<h3>Kare-Kare</h3>
+<p>Comforting Filipino flavors for the family table.</p>
+<strong>₱590</strong>
+</div>
+</article>
+
+<article class="dish" data-cat="favorites">
+<div class="dish-img">
+<img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=85" alt="Gourmet burger">
+<div class="dish-number">06</div>
+</div>
+<div class="dish-body">
+<h3>Smash Burger</h3>
+<p>A hearty favorite when you're craving something casual.</p>
+<strong>₱450</strong>
+</div>
+</article>
+</div>
+<div class="note">Sample menu and pricing. Confirm actual prices and availability before publishing.</div>
+</section>
+
+<section class="dark-section" id="events">
+<div class="label">03 — EVENTS</div>
+<div class="grid2">
+<div>
+<div class="eyebrow">DINING • CELEBRATIONS • GATHERINGS</div>
+<h2>Gather<br><em>beautifully.</em></h2>
+<p class="copy">From intimate dinners to memorable celebrations, create an occasion your guests will remember.</p>
+</div>
+
+<div class="event-list">
+<div class="event">
+<span>01</span>
+<div>
+<h3>Private Celebrations</h3>
+<p>Birthdays, anniversaries, reunions, and family occasions.</p>
+</div>
+</div>
+
+<div class="event">
+<span>02</span>
+<div>
+<h3>Corporate Gatherings</h3>
+<p>Meetings, dinners, and team celebrations.</p>
+</div>
+</div>
+
+<div class="event">
+<span>03</span>
+<div>
+<h3>Weddings & Functions</h3>
+<p>Ask about available spaces and arrangements.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="gallery" id="gallery">
+<div class="label">04 — GALLERY</div>
+<div class="gallery-grid">
+<div class="g tall"><b>RESTAURANT</b><small>DINING EXPERIENCE</small></div>
+<div class="g food"><b>FOOD</b><small>SIGNATURE DISHES</small></div>
+<div class="g"><b>DETAILS</b><small>THE LITTLE THINGS</small></div>
+<div class="g wide"><b>BUKIDNON</b><small>BEAUTIFUL SURROUNDINGS</small></div>
+</div>
+</section>
+
+<section class="reservation" id="reservation">
+<div class="grid2">
+<div>
+<div class="label">05 — RESERVATIONS</div>
+<div class="eyebrow">YOUR TABLE AWAITS</div>
+<h2>Let's make<br><em>it special.</em></h2>
+<p class="copy">Send your reservation details through the form.</p>
+</div>
+
+<form class="form" id="reservationForm" onsubmit="submitReservation(event)">
+<label>
+Full Name
+<input id="name" type="text" placeholder="Your name" required>
+</label>
+
+<div class="row">
+<label>
+Date
+<input id="date" type="date" required>
+</label>
+<label>
+Guests
+<select id="guests" required>
+<option value="">Select</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+<option>6+</option>
+</select>
+</label>
+</div>
+
+<label>
+Contact Number
+<input id="phone" type="tel" placeholder="+63..." required>
+</label>
+
+<label>
+Message
+<textarea id="messageText" rows="4" placeholder="Tell us about your occasion"></textarea>
+</label>
+
+<button type="submit" class="btn submit">Send Reservation</button>
+<p id="message"></p>
+</form>
+</div>
+</section>
+
+<section class="contact" id="contact">
+<div class="label">06 — CONTACT</div>
+<div class="grid2">
+<div>
+<div class="eyebrow">PLAN YOUR VISIT</div>
+<h2>We'd love<br><em>to host you.</em></h2>
+</div>
+<div>
+<div class="contact-item">
+<span>Address</span>
+<p>Barangay, Bukidnon, Philippines</p>
+</div>
+<div class="contact-item">
+<span>Hours</span>
+<p>Tue–Sun • 11:00 AM – 10:00 PM</p>
+</div>
+<div class="contact-item">
+<span>Call</span>
+<p>+63 912 345 6789</p>
+</div>
+<button class="btn map-btn" onclick="window.open('https://maps.google.com','_blank')">Get Directions</button>
+</div>
+</div>
+</section>
+</main>
+
+<footer>
+<div>© 2025 Ricardo's by Cucina Higala</div>
+<div>Fine Dining • Bukidnon</div>
+</footer>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+function goTo(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+  const nav = document.getElementById('nav');
+  if(nav.classList.contains('open')) nav.classList.remove('open');
+}
+
+function toggleMenu(){
+  const nav = document.getElementById('nav');
+  nav.classList.toggle('open');
+}
+
+function filterMenu(cat, btn){
+  const dishes = document.querySelectorAll('.dish');
+  const tabs = document.querySelectorAll('.tab');
+
+  tabs.forEach(tab => tab.classList.remove('active'));
+  btn.classList.add('active');
+
+  dishes.forEach(dish => {
+    const itemCat = dish.dataset.cat;
+    const show = cat === 'all' || itemCat.includes(cat);
+    dish.classList.toggle('hide', !show);
+  });
+}
+
+function submitReservation(event){
+  event.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const date = document.getElementById('date').value;
+  const guests = document.getElementById('guests').value;
+  const phone = document.getElementById('phone').value.trim();
+  const messageBox = document.getElementById('message');
+
+  if (!name || !date || !guests || !phone) {
+    messageBox.textContent = 'Please complete all required fields.';
+    return;
+  }
+
+  messageBox.textContent = `Thank you, ${name}! Your reservation request for ${guests} guests on ${date} has been received.`;
+  document.getElementById('reservationForm').reset();
+}
+
+window.addEventListener('scroll', () => {
+  const backTop = document.getElementById('backTop');
+  backTop.classList.toggle('show', window.scrollY > 300);
+});
+</script>
+</body>
+</html>
